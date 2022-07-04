@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="duke-java-programming-course-3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/apache-csv.jar!/" />
+      <root url="jar://$PROJECT_DIR$/courserajava.jar!/" />
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/apache-csv.jar!/" />
+      <root url="jar://$PROJECT_DIR$/courserajava.jar!/" />
+      <root url="file://$PROJECT_DIR$" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$" recursive="false" type="SOURCES" />
+  </library>
+</component>
