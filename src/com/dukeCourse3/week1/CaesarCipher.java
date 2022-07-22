@@ -62,7 +62,7 @@ public class CaesarCipher {
     }
 
     public void testCaesar(){
-        int key = 17;
+        int key = 15;
         FileResource fr = new FileResource();
         String message = fr.asString();
         String encrypted = encrypt(message, key);
@@ -70,7 +70,8 @@ public class CaesarCipher {
     }
 
     public void testEncryptTwoKeys(){
-        String response = encryptTwoKeys("First Legion",23,17);
+        String message = "At noon be in the conference room with your hat on for a surprise party. YELL LOUD!";
+        String response = encryptTwoKeys(message,8,21);
         System.out.println("the value from encryptTwoKeys is " + response);
     }
 }
