@@ -9,7 +9,7 @@ public class decryptMessage {
             char ch = Character.toLowerCase(message.charAt(k));
             int dex = alph.indexOf(ch);
             if(dex != -1) {
-                counts[dex] += 1;
+                counts[dex] = counts[dex] + 1;
             }
         }
         return counts;
@@ -28,10 +28,6 @@ public class decryptMessage {
     public String decrypt(String encrypted){
         CaesarCipher cc = new CaesarCipher();
         int[] freqs = countLetters(encrypted);
-        for(int j=0; j < freqs.length; j++){
-            System.out.println("index " + j + " value " + freqs[j]);
-        }
-
         int maxDex = maxIndex(freqs);
         int dkey = maxDex - 4;
         System.out.println("dkey value is " + dkey + ", maxDex value is " + maxDex);
@@ -41,8 +37,15 @@ public class decryptMessage {
         return cc.encrypt(encrypted, 26 - dkey);
     }
 
+    public String halfOfString(String message, int start){
+        StringBuilder halfString = new StringBuilder();
+
+
+        return halfString.toString();
+    }
+
     public void testDecrypt(){
-        String message = "Hi, how are you, I am testing the encrypt and decrypt function";
+        String message = "Just a test string with lots of eeeeeeeeeeeeeeeees";
         CaesarCipher cc = new CaesarCipher();
         String encryptedMessage = cc.encrypt(message,15);
         System.out.println("the encrypted message is " + encryptedMessage);
