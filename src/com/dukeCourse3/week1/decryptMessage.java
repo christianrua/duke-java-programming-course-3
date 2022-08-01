@@ -1,5 +1,7 @@
 package com.dukeCourse3.week1;
 
+import com.dukeCourse3.week1.CaesarCipher;
+
 public class decryptMessage {
 
     public int[] countLetters(String message){
@@ -38,10 +40,63 @@ public class decryptMessage {
     }
 
     public String halfOfString(String message, int start){
-        StringBuilder halfString = new StringBuilder();
 
+        StringBuilder halfStringOdd = new StringBuilder();
+        StringBuilder halfStringEven = new StringBuilder();
 
-        return halfString.toString();
+        for(int i=0; i < message.length(); i++){
+            char ch = message.charAt(i);
+            if(Character.isAlphabetic(ch)) {
+                if (i % 2 == 0) {
+                    halfStringEven.append(message.charAt(i));
+                } else {
+                    halfStringOdd.append(message.charAt(i));
+                }
+            }
+        }
+
+        if(start == 0) {
+            return halfStringEven.toString();
+        } else {
+            return halfStringOdd.toString();
+        }
+
+    }
+
+    public int getKey(String s){
+        int[] freqs = countLetters(s);
+        int maxIndex = maxIndex(freqs);
+        int dkey = maxIndex - 4; // 4 is the index of E, the most common letter
+        if(maxIndex < 4){
+            dkey = 26 - (4-maxIndex);
+        }
+
+        return dkey;
+
+    }
+
+    public void decryptTwoKeys(String encrypted){
+        String firstStringCharacter = halfOfString(encrypted, 0);
+        String secondStringCharacter = halfOfString(encrypted, 1);
+
+        int firstKey = getKey(firstStringCharacter);
+        int secondKey = getKey(secondStringCharacter);
+
+        System.out.println("The keys found are key1: " + firstKey + " key2: " + secondKey);
+        CaesarCipher cc = new CaesarCipher();
+        String decryptedMessage = cc.encryptTwoKeys(encrypted,26 - firstKey,26 - secondKey);
+        System.out.println("The decrypted message is "+ decryptedMessage);
+    }
+
+    public void testDecryptTwoKeys(){
+        decryptTwoKeys("Gwpv c vbuq pvokki yfve iqqu qc bgbgbgbgbgbgbgbgbu");
+    }
+
+    public void testHalfOfString(){
+        String response1 = halfOfString("Qbkm Zgis", 0);
+        System.out.println("response1 value "+response1);
+        String response2 = halfOfString("Qbkm Zgis", 1);
+        System.out.println("response2 value "+response2);
     }
 
     public void testDecrypt(){

@@ -6,7 +6,7 @@ public class testClass {
 
     public static void main(String[] args) {
         decryptMessage classToBeTested = new decryptMessage();
-        classToBeTested.testDecrypt();
+        classToBeTested.testDecryptTwoKeys();
 
     }
 }
