@@ -5,8 +5,8 @@ import com.dukeCourse3.week1.*;
 public class testClass {
 
     public static void main(String[] args) {
-        decryptMessage classToBeTested = new decryptMessage();
-        classToBeTested.testDecryptTwoKeys();
+        CaesarCiperDecrypt classToBeTested = new CaesarCiperDecrypt();
+        classToBeTested.testdecrypt2Key();
 
     }
 }

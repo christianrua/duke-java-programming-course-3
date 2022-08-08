@@ -9,6 +9,7 @@ public class CommonWords {
     String dataFolderPath = "C:\\Users\\christian.rua\\Documents\\development\\Java-Duke\\course_3\\common_words_files\\";
     public String[] getCommon(){
         FileResource resource = new FileResource(dataFolderPath + "common.txt");
+        //FileResource resource = new FileResource();
         String[] common = new String[20];
         int index = 0;
         for(String s : resource.words()){
@@ -36,6 +37,7 @@ public class CommonWords {
             }
         }
     }
+
 
     public void countShakespeare(){
         String[] plays = {"caesar.txt", "errors.txt", "hamlet.txt",

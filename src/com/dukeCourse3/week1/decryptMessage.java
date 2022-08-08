@@ -89,7 +89,7 @@ public class decryptMessage {
     }
 
     public void testDecryptTwoKeys(){
-        decryptTwoKeys("Gwpv c vbuq pvokki yfve iqqu qc bgbgbgbgbgbgbgbgbu");
+        decryptTwoKeys("Top ncmy qkff vi vguv vbg ycpx");
     }
 
     public void testHalfOfString(){

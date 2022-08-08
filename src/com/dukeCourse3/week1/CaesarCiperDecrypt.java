@@ -161,4 +161,8 @@ public class CaesarCiperDecrypt {
         String decryptedMessage = decrypt1Key(encryptedMessage);
         System.out.println("the decrypted message is " + decryptedMessage + "    " + decryptedMessage_2);
     }
+
+    public void testdecrypt2Key(){
+        decrypt2Key("Top ncmy qkff vi vguv vbg ycpx");
+    }
 }

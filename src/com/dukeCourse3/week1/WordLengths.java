@@ -13,7 +13,7 @@ public class WordLengths {
                 if(Character.isLetter(word.charAt(k))){
                     numberOfCharacters += 1;
                 } else if(word.charAt(k) == '-' || word.charAt(k) == '\''){
-                    if( k + 1 <= word.length() && Character.isLetter(word.charAt(k + 1))){
+                    if( k + 1 < word.length() && Character.isLetter(word.charAt(k + 1))){
                         numberOfCharacters += 1;
                     }
                 }
