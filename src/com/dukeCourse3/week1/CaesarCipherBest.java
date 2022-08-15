@@ -3,8 +3,11 @@ package com.dukeCourse3.week1;
 import java.util.Arrays;
 import java.util.List;
 
+import com.dukeCourse3.week1.CaesarCipherHelper;
+
 public class CaesarCipherBest {
-    private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private CaesarCipherHelper cch = new CaesarCipherHelper();
+    private String alphabet = cch.alphabet;
     private String shiftedAlphabet;
     private int mainKey;
     private String shiftedAlphabetLowerCase;
@@ -38,7 +41,7 @@ public class CaesarCipherBest {
         System.out.println("value of input " + input);
         for(int i = 0; i < input.length(); i++){
             char c = input.charAt(i);
-            List<String> alphabetComponents = this.getTypeOfAlphabet(c);
+            List<String> alphabetComponents = cch.getTypeOfAlphabet(c, this.alphabet, this.shiftedAlphabet);
             String alphabet = alphabetComponents.get(0);
             String shiftedAlphabet = alphabetComponents.get(1);
 

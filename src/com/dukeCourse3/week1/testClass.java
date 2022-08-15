@@ -5,7 +5,7 @@ import com.dukeCourse3.week1.*;
 public class testClass {
 
     public static void main(String[] args) {
-        TestCaesarCipher classToBeTested = new TestCaesarCipher();
+        TestCaesarCipherTwo classToBeTested = new TestCaesarCipherTwo();
         classToBeTested.simpleTests();
 
     }
