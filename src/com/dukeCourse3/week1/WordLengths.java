@@ -43,8 +43,8 @@ public class WordLengths {
         return largestValueIndex;
     }
 
-    public void testCountWordLengths(){
-        FileResource f = new FileResource();
+    public void testCountWordLengths(String path){
+        FileResource f = new FileResource(path);
         int[] counts = new int[31];
 
         counts = countWordLengths(f, counts);

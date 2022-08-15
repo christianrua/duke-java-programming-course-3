@@ -6,7 +6,7 @@ public class TestCaesarCipherTwo {
     private CaesarCipherHelper cch = new CaesarCipherHelper();
     String alphabet = cch.alphabet;
 
-    public String halfOfString(String message, int start){
+    private String halfOfString(String message, int start){
 
         StringBuilder halfStringOdd = new StringBuilder();
         StringBuilder halfStringEven = new StringBuilder();
