@@ -1,11 +1,11 @@
 package com.dukeCourse3.week2;
 
-import com.dukeCourse3.week2.WordsWithArrays;
+import com.dukeCourse3.week2.WordFrequencies;
 
 public class TesterClass {
 
     public static void main(String[] args) {
-        WordsWithArrays tc = new WordsWithArrays();
+        WordFrequencies tc = new WordFrequencies();
         tc.tester();
     }
 

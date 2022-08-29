@@ -17,6 +17,8 @@ public class WordFrequencies {
     }
 
     public void findUnique(){
+        myWords.clear();
+        myFreqs.clear();
         FileResource resource = new FileResource();
         for(String s : resource.words()){
             s = s.toLowerCase();
@@ -31,11 +33,28 @@ public class WordFrequencies {
         }
     }
 
+    public int findIndexOfMax(){
+        int maxValue = 0;
+        int maxIndex = 0;
+        for(int i=0; i < myFreqs.size(); i++){
+            int currentValue = myFreqs.get(i);
+            if(currentValue > maxValue){
+                maxValue = currentValue;
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+
     public void tester(){
         this.findUnique();
+        int indexOfMaxCommonWord = findIndexOfMax();
         System.out.println("# unique words: "+ myWords.size());
+
         for(int k=0; k < myWords.size(); k++){
             System.out.println(myFreqs.get(k) + "\t" + myWords.get(k));
         }
+
+        System.out.println("The most common word is " + myWords.get(indexOfMaxCommonWord) + " , which frequency is "+myFreqs.get(indexOfMaxCommonWord));
     }
 }
