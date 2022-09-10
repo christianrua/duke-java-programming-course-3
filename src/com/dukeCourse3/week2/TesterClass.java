@@ -6,8 +6,8 @@ import com.dukeCourse3.week2.WordFrequencies;
 public class TesterClass {
 
     public static void main(String[] args) {
-        CharactersInPlay tc = new CharactersInPlay();
-        tc.characterWithNumParts(10,15);
+        GladLib tc = new GladLib();
+        tc.makeStory();
     }
 
 }
