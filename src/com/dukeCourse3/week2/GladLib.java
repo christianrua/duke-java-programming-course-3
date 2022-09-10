@@ -11,10 +11,12 @@ public class GladLib {
     private ArrayList<String> animalList;
     private ArrayList<String> timeList;
     private ArrayList<String> verbList;
+    private ArrayList<String> fruitList;
+    private ArrayList<String> seenWords;
 
     private Random myRandom;
 
-    private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
+    private static String dataSourceURL = "http://dukelearntoprogram.com/course3/datalong";
     private static String dataSourceDirectory = "week2Data/data";
 
     public GladLib(){
@@ -36,6 +38,8 @@ public class GladLib {
         animalList = readIt(source+"/animal.txt");
         timeList = readIt(source+"/timeframe.txt");
         verbList = readIt(source+"/verb.txt");
+        fruitList = readIt(source+"/fruit.txt");
+        seenWords = new ArrayList<String>();
     }
 
     private String randomFrom(ArrayList<String> source){
@@ -71,6 +75,9 @@ public class GladLib {
         if (label.equals("verb")){
             return randomFrom(verbList);
         }
+        if (label.equals("fruit")){
+            return randomFrom(fruitList);
+        }
         return "**UNKNOWN**";
     }
 
@@ -83,6 +90,21 @@ public class GladLib {
         String prefix = w.substring(0,first);
         String suffix = w.substring(last+1);
         String sub = getSubstitute(w.substring(first+1,last));
+
+        if(seenWords.size() == 0){
+            seenWords.add(sub);
+        }
+
+        for (int i = 0; i < seenWords.size(); i++) {
+            String word = seenWords.get(i);
+            if(word.equals(sub)){
+                sub = getSubstitute(w.substring(first+1,last));
+                i = 0;
+            }
+        }
+
+        seenWords.add(sub);
+
         return prefix+sub+suffix;
     }
 
@@ -134,8 +156,11 @@ public class GladLib {
 
     public void makeStory(){
         System.out.println("\n");
-        String story = fromTemplate(dataSourceDirectory+"/madtemplate3.txt");
+        String story = fromTemplate(dataSourceDirectory+"/madtemplate2.txt");
         printOut(story, 60);
+        System.out.println("\n");
+        System.out.println("Total number of words that where replaced right " + Integer.toString(seenWords.size()));
+        seenWords = new ArrayList<String>();
     }
 
 
