@@ -1,13 +1,12 @@
 package com.dukeCourse3.week2;
 
-import com.dukeCourse3.week2.CharactersInPlay;
-import com.dukeCourse3.week2.WordFrequencies;
+import com.dukeCourse3.week2.*;
 
 public class TesterClass {
 
     public static void main(String[] args) {
-        GladLib tc = new GladLib();
-        tc.makeStory();
+        WordsInFiles tc = new WordsInFiles();
+        tc.tester();
     }
 
 }
