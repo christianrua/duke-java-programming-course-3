@@ -3,7 +3,7 @@ import edu.duke.*;
 import java.util.*;
 import java.util.HashMap;
 
-public class GladLibHasMap {
+public class GladLibHashMap {
 
     private HashMap<String, ArrayList<String>> myMap = new HashMap<String, ArrayList<String>>();
     private String[] topics = new String[] {
@@ -33,12 +33,12 @@ public class GladLibHasMap {
     private static String dataSourceURL = "http://dukelearntoprogram.com/course3/datalong";
     private static String dataSourceDirectory = "week2Data/data";
 
-    public GladLibHasMap(){
+    public GladLibHashMap(){
         initializeFromSource(dataSourceDirectory);
         myRandom = new Random();
     }
 
-    public GladLibHasMap(String source){
+    public GladLibHashMap(String source){
         initializeFromSource(source);
         myRandom = new Random();
     }
@@ -143,6 +143,8 @@ public class GladLibHasMap {
         }
         return list;
     }
+
+    // I`m here trying to the totalWordsInMap function
 
     public void makeStory(){
         System.out.println("\n");
