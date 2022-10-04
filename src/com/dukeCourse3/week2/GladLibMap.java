@@ -3,9 +3,10 @@ import edu.duke.*;
 import java.util.*;
 import java.util.HashMap;
 
-public class GladLibHashMap {
+public class GladLibMap {
 
     private HashMap<String, ArrayList<String>> myMap = new HashMap<String, ArrayList<String>>();
+    private ArrayList<String> wordsUsedList = new ArrayList<>();
     private String[] topics = new String[] {
             "adjective",
             "noun",
@@ -33,12 +34,12 @@ public class GladLibHashMap {
     private static String dataSourceURL = "http://dukelearntoprogram.com/course3/datalong";
     private static String dataSourceDirectory = "week2Data/data";
 
-    public GladLibHashMap(){
+    public GladLibMap(){
         initializeFromSource(dataSourceDirectory);
         myRandom = new Random();
     }
 
-    public GladLibHashMap(String source){
+    public GladLibMap(String source){
         initializeFromSource(source);
         myRandom = new Random();
     }
@@ -115,12 +116,14 @@ public class GladLibHashMap {
         if (source.startsWith("http")) {
             URLResource resource = new URLResource(source);
             for(String word : resource.words()){
+                wordsUsedList.add(word);
                 story = story + processWord(word) + " ";
             }
         }
         else {
             FileResource resource = new FileResource(source);
             for(String word : resource.words()){
+                wordsUsedList.add(word);
                 story = story + processWord(word) + " ";
             }
         }
@@ -145,6 +148,23 @@ public class GladLibHashMap {
     }
 
     // I`m here trying to the totalWordsInMap function
+    private int totalWordsInMap(){
+        int totalWordsInMap = 0;
+        for (ArrayList<String> topic : myMap.values()) {
+            totalWordsInMap = totalWordsInMap + topic.size();
+        }
+        return totalWordsInMap;
+    }
+
+    private int totalWordsConsidered(){
+        int totalTopicsUsed = 0;
+        for (int i=0; i <= wordsUsedList.size(); i++){
+            String topic = wordsUsedList.get(i);
+            totalTopicsUsed = totalTopicsUsed + myMap.get(topic).size();
+        }
+        return totalTopicsUsed;
+    }
+
 
     public void makeStory(){
         System.out.println("\n");
