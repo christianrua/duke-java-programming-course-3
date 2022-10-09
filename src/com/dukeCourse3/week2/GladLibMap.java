@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class GladLibMap {
 
     private HashMap<String, ArrayList<String>> myMap = new HashMap<String, ArrayList<String>>();
-    private ArrayList<String> wordsUsedList = new ArrayList<>();
+    private ArrayList<String> categoriesUsedList = new ArrayList<>();
     private String[] topics = new String[] {
             "adjective",
             "noun",
@@ -61,11 +61,9 @@ public class GladLibMap {
     private String getSubstitute(String label) {
 
         if(myMap.containsKey(label)){
-            if(label.equals("number")){
-                return ""+myRandom.nextInt(50)+5;
-            } else {
-                return randomFrom(myMap.get(label));
-            }
+            return randomFrom(myMap.get(label));
+        } else if (label.equals("number")) {
+            return "" + myRandom.nextInt(50) + 5;
         } else {
             return "**UNKNOWN**";
         }
@@ -80,8 +78,11 @@ public class GladLibMap {
         }
         String prefix = w.substring(0,first);
         String suffix = w.substring(last+1);
-        String sub = getSubstitute(w.substring(first+1,last));
-
+        String categoryName = w.substring(first+1,last);
+        String sub = getSubstitute(categoryName);
+        if (!categoriesUsedList.contains(categoryName)){
+            categoriesUsedList.add(categoryName);
+        }
         if(myMap.get("seenWords").size() == 0){
             myMap.get("seenWords").add(sub);
         }
@@ -116,14 +117,12 @@ public class GladLibMap {
         if (source.startsWith("http")) {
             URLResource resource = new URLResource(source);
             for(String word : resource.words()){
-                wordsUsedList.add(word);
                 story = story + processWord(word) + " ";
             }
         }
         else {
             FileResource resource = new FileResource(source);
             for(String word : resource.words()){
-                wordsUsedList.add(word);
                 story = story + processWord(word) + " ";
             }
         }
@@ -147,7 +146,6 @@ public class GladLibMap {
         return list;
     }
 
-    // I`m here trying to the totalWordsInMap function
     private int totalWordsInMap(){
         int totalWordsInMap = 0;
         for (ArrayList<String> topic : myMap.values()) {
@@ -158,9 +156,11 @@ public class GladLibMap {
 
     private int totalWordsConsidered(){
         int totalTopicsUsed = 0;
-        for (int i=0; i <= wordsUsedList.size(); i++){
-            String topic = wordsUsedList.get(i);
-            totalTopicsUsed = totalTopicsUsed + myMap.get(topic).size();
+        for (int i = 0; i < categoriesUsedList.size(); i++){
+            String topic = categoriesUsedList.get(i);
+            if(!topic.equals("number")){
+                totalTopicsUsed = totalTopicsUsed + myMap.get(topic).size();
+            }
         }
         return totalTopicsUsed;
     }
@@ -173,6 +173,10 @@ public class GladLibMap {
         System.out.println("\n");
         System.out.println("Total number of words that where replaced right " + Integer.toString(myMap.get("seenWords").size()));
         myMap.put("seenWords", new ArrayList<String>());
+        System.out.println("\n");
+        System.out.println("totalWordsInMap value is: " + totalWordsInMap());
+        System.out.println("totalWordsConsidered value is: " + totalWordsConsidered());
+
     }
 
 
