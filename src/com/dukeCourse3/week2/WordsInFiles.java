@@ -110,10 +110,15 @@ public class WordsInFiles {
     // each key its ArrayList. This might be helpful to make sure the map was built correctly.
     public void tester(){
         buildWordFileMap();
-        printMapBuild();
         int maxWordTimesInFiles = maxNumber();
         System.out.println("the maximum number of files any word is in " + maxWordTimesInFiles);
         ArrayList<String> maxWordsList = wordsInNumFiles(maxWordTimesInFiles);
+        int maxWordsListSize = maxWordsList.size();
+        System.out.println("maxWordsListSize value is " + maxWordsListSize);
+        int wordsIn4Files = wordsInNumFiles(4).size();
+        System.out.println("wordsIn4Files value is " + wordsIn4Files);
+        printFilesIn("sea");
+        printFilesIn("tree");
         System.out.println("those max words are: ");
         for(String word : maxWordsList){
             printFilesIn(word);

@@ -122,11 +122,12 @@ public class CodonCount {
         String dna = fr.asString().toUpperCase().trim();
         System.out.print("the dna string is "+dna);
         for(int i=0; i <= 2; i++){
+            System.out.println("the i value is " + i);
             buildCodonMap(i, dna);
             System.out.println("run number "+ i +" the total number of codons is " + dnaCodons.keySet().size());
             String mostCommonCodon = getMostCommonCodon();
             System.out.println("The most common codon is "+ mostCommonCodon + " and it`s value is "+dnaCodons.get(mostCommonCodon));
-            printCodonCounts(1,5);
+            printCodonCounts(1,7);
             System.out.println("");
         }
 
