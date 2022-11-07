@@ -54,6 +54,14 @@ public class Tester {
 
     }
 
+    public static void testIPsForDays(LogAnalyzer la){
+        HashMap<String, ArrayList<String>> response = la.IPsForDays();
+        System.out.println("this are IPs by date ");
+        response.forEach((key, value) -> {
+            System.out.println(key +" "+ value);
+        });
+    }
+
     public static void main(String[] args) {
 
         String rootFolder = "week3Data";
@@ -74,7 +82,8 @@ public class Tester {
             //testCountUniqueIPsInRange(300,399,la);
             //testCountVisitsPerIP(la);
             //testMostNumberVisitsByIP(la);
-            testIPsMostVisits(la);
+            //testIPsMostVisits(la);
+            testIPsForDays(la);
         }
 
     }

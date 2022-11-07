@@ -101,4 +101,27 @@ public class LogAnalyzer {
     }
 
     // pending iPsForDays
+    public HashMap<String, ArrayList<String>> IPsForDays(){
+        HashMap<String, ArrayList<String>> IPsForDays = new HashMap<>();
+        for(LogEntry le : records){
+            String ip = le.getIpAddress();
+            String dateValue= le.getAccessTime().toString().substring(4,10);
+            if(!IPsForDays.containsKey(dateValue)){
+                ArrayList<String> datesList = new ArrayList<>();
+                datesList.add(ip);
+                IPsForDays.put(dateValue, datesList);
+            } else {
+                ArrayList<String> datesList = IPsForDays.get(dateValue);
+                datesList.add(ip);
+                IPsForDays.replace(dateValue, datesList);
+            }
+        }
+        return IPsForDays;
+    }
+
+    public String dayWithMostIPVisits(){
+        HashMap<String, ArrayList<String>> IPsForDays = IPsForDays();
+
+    }
+
 }
