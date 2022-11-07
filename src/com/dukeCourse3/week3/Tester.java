@@ -45,6 +45,15 @@ public class Tester {
         System.out.println("The max number of visits by a single IP is " + maxValue);
     }
 
+    public static void testIPsMostVisits(LogAnalyzer la){
+        ArrayList<String> response = la.iPsMostVisits();
+        System.out.println("the IPs with most visits are: ");
+        response.forEach(value -> {
+            System.out.println(value);
+        });
+
+    }
+
     public static void main(String[] args) {
 
         String rootFolder = "week3Data";
@@ -64,7 +73,8 @@ public class Tester {
             //testUniqueIPVisitsOnDay("Mar 24", la);
             //testCountUniqueIPsInRange(300,399,la);
             //testCountVisitsPerIP(la);
-            testMostNumberVisitsByIP(la);
+            //testMostNumberVisitsByIP(la);
+            testIPsMostVisits(la);
         }
 
     }

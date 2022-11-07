@@ -89,5 +89,16 @@ public class LogAnalyzer {
         return Collections.max(visitsPerIP.values());
     }
 
-    // pending iPsMostVisits
+    public ArrayList<String> iPsMostVisits() {
+        int maxValueOfVisits = mostNumberVisitsByIP();
+        ArrayList<String> IPsWithMaxVisits = new ArrayList<>();
+        visitsPerIP.forEach((key, value) -> {
+            if(value == maxValueOfVisits){
+                IPsWithMaxVisits.add(key);
+            }
+        });
+        return IPsWithMaxVisits;
+    }
+
+    // pending iPsForDays
 }
