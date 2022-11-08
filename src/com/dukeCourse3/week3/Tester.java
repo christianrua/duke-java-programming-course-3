@@ -62,14 +62,26 @@ public class Tester {
         });
     }
 
+    public static void testDayWithMostIPVisits(LogAnalyzer la){
+        String response = la.dayWithMostIPVisits();
+        System.out.println("Day with most IP's is " + response);
+    }
+
+    public static void testIPsWithMostVisitsOnDay(LogAnalyzer la){
+        ArrayList<String> response = la.IPsWithMostVisitsOnDay();
+        System.out.println("IPs with most visits: " + response);
+    }
+
     public static void main(String[] args) {
 
         String rootFolder = "week3Data";
         ArrayList<String> fileNameList = new ArrayList<>(Arrays.asList(
                 "short-test_log.txt",
                 "weblog-short_log.txt",
+                "weblog1_log.txt",
                 "weblog2-short_log.txt",
-                "weblog3-short_log.txt"
+                "weblog3-short_log.txt",
+                "weblog2_log"
         ));
         for (String fileName : fileNameList ) {
             System.out.println(" ");
@@ -78,12 +90,14 @@ public class Tester {
             //testPrintIps(la);
             //testUniqueIps(la);
             //testPrintAllHigherThanNum(400, la);
-            //testUniqueIPVisitsOnDay("Mar 24", la);
-            //testCountUniqueIPsInRange(300,399,la);
+            //testUniqueIPVisitsOnDay("Sep 27", la);
+            //testCountUniqueIPsInRange(200,299,la);
             //testCountVisitsPerIP(la);
             //testMostNumberVisitsByIP(la);
             //testIPsMostVisits(la);
-            testIPsForDays(la);
+            //testIPsForDays(la);
+            //testDayWithMostIPVisits(la);
+            testIPsWithMostVisitsOnDay(la);
         }
 
     }

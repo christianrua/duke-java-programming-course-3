@@ -18,8 +18,6 @@ public class LogAnalyzer {
     public void readFile(String filename) {
         // complete method
         FileResource fr = new FileResource(filename);
-
-
         for(String  line : fr.lines()){
             LogEntry row = webLogParser.parseEntry(line);
             records.add(row);
@@ -121,7 +119,37 @@ public class LogAnalyzer {
 
     public String dayWithMostIPVisits(){
         HashMap<String, ArrayList<String>> IPsForDays = IPsForDays();
+        int maxNumberOfIPs = 0;
+        String dateWithMostUPs = "";
+        for(String key : IPsForDays.keySet()){
+            int listSize = IPsForDays.get(key).size();
+            if(listSize > maxNumberOfIPs){
+                dateWithMostUPs = key;
+                maxNumberOfIPs = listSize;
+            }
+        }
+        return dateWithMostUPs;
+    }
 
+    public ArrayList<String> IPsWithMostVisitsOnDay(){
+        String dayWithMostIPs = dayWithMostIPVisits();
+        HashMap<String, Integer> countIPs = new HashMap<>();
+        ArrayList<String> ipList = new ArrayList<>();
+        for(String ip: IPsForDays().get(dayWithMostIPs)){
+            if(!countIPs.containsKey(ip)){
+                countIPs.put(ip,1);
+            } else {
+                countIPs.replace(ip, countIPs.get(ip) + 1);
+            }
+        }
+
+        int maxNumberOfRepetitions = Collections.max(countIPs.values());
+        for (String ip: countIPs.keySet()){
+            if(countIPs.get(ip) == maxNumberOfRepetitions){
+                ipList.add(ip);
+            }
+        }
+        return ipList;
     }
 
 }
