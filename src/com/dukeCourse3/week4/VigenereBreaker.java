@@ -4,6 +4,16 @@ import java.util.*;
 import edu.duke.*;
 
 public class VigenereBreaker {
+
+    private String lowerCaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase();
+    private Map<Character,Integer> charsMap = new HashMap<Character, Integer>();
+
+    private void resetCharMap(){
+        for(char c : lowerCaseAlphabet.toCharArray()){
+            charsMap.put(c,0);
+        }
+    }
+
     public String sliceString(String message, int whichSlice, int totalSlices) {
         StringBuilder sb = new StringBuilder();
         for (int i = whichSlice; i < message.length(); i += totalSlices){
@@ -14,7 +24,7 @@ public class VigenereBreaker {
 
     public String getKeyRepresentation(int[] keyLength) {
         StringBuilder sb = new StringBuilder();
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase();
+        String alphabet = lowerCaseAlphabet;
         for (int i = 0; i < keyLength.length; i++){
             sb.append(alphabet.charAt(keyLength[i]));
         }
@@ -71,6 +81,9 @@ public class VigenereBreaker {
             VigenereCipher vc = new VigenereCipher(keyLength);
             String decryptedMessage = vc.decrypt(encrypted);
             int numberOfRealWords = countWords(decryptedMessage, dictionary);
+            if(i == 38){
+                System.out.println("for the i == 38 the numbers of words is " + numberOfRealWords);
+            }
             if(numberOfRealWords > bestRealWordsCount){
                 bestRealWordsCount = numberOfRealWords;
                 bestDecryptedMessage = decryptedMessage;
@@ -97,4 +110,27 @@ public class VigenereBreaker {
         System.out.println("the decrypted message is " + decryptedMessage);
     }
 
+    public Character mostCommonCharIn(HashSet<String> dictionary){
+        char mostCommonChar;
+        resetCharMap();
+        for (String word : dictionary) {
+            for(int i = 0; i < word.length(); i++){
+                char c = word.charAt(i);
+                if(charsMap.containsKey(c)){
+                    int prevValue = charsMap.get(c);
+                    charsMap.put(c, prevValue + 1);
+                }
+
+            }
+        }
+        mostCommonChar = charsMap
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .findFirst()
+                .get().getKey();
+        return mostCommonChar;
+    }
+
+    // I'm building breakForAllLangs
 }
