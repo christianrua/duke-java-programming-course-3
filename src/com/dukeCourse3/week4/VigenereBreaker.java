@@ -69,21 +69,22 @@ public class VigenereBreaker {
         return validWordsValue;
     }
 
-    public String breakForLanguage(String encrypted, HashSet<String> dictionary){
+    public List<Object> breakForLanguage(String encrypted, HashSet<String> dictionary){
         int bestRealWordsCount = 0;
         String bestDecryptedMessage = "";
         String keyValue = "";
         String bestKeyLengthString = "";
 
         for(int i=1; i <= 100; i++){
-            int[] keyLength = tryKeyLength(encrypted,i,'e');
+            char languageChar = mostCommonCharIn(dictionary);
+            int[] keyLength = tryKeyLength(encrypted,i,languageChar);
             int[] bestKeyLength = new int[keyLength.length];
             VigenereCipher vc = new VigenereCipher(keyLength);
             String decryptedMessage = vc.decrypt(encrypted);
             int numberOfRealWords = countWords(decryptedMessage, dictionary);
-            if(i == 38){
-                System.out.println("for the i == 38 the numbers of words is " + numberOfRealWords);
-            }
+//            if(i == 38){
+//                System.out.println("for the i == 38 the numbers of words is " + numberOfRealWords);
+//            }
             if(numberOfRealWords > bestRealWordsCount){
                 bestRealWordsCount = numberOfRealWords;
                 bestDecryptedMessage = decryptedMessage;
@@ -93,21 +94,31 @@ public class VigenereBreaker {
             }
         }
 
-        System.out.println("bestRealWordsCount value " + bestRealWordsCount);
-        System.out.println("bestKeyLength value " + bestKeyLengthString);
-        System.out.println("keyValue value " + keyValue);
-        return bestDecryptedMessage;
-
+//        System.out.println("bestRealWordsCount value " + bestRealWordsCount);
+//        System.out.println("bestKeyLength value " + bestKeyLengthString);
+//        System.out.println("keyValue value " + keyValue);
+        return Arrays.asList(bestDecryptedMessage,bestRealWordsCount);
     }
 
+    private HashMap<String, HashSet<String>> createLanguagesDict(){
+        HashMap<String, HashSet<String>> languagesDict = new HashMap<>();
 
-    public void breakVigenere() {
-        FileResource fr = new FileResource();
-        String message = fr.asString();
-        FileResource languageContent = new FileResource("week4Data/dictionaries/English");
-        HashSet<String> languageDict = readDictionary(languageContent);
-        String decryptedMessage = breakForLanguage(message, languageDict);
-        System.out.println("the decrypted message is " + decryptedMessage);
+        ArrayList<String> languagesList = new ArrayList<>(Arrays.asList("Danish",
+                "Dutch",
+                "English",
+                "French",
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"));
+        for(String language : languagesList){
+            System.out.println("loading the dict for the language " + language);
+            FileResource fr = new FileResource("week4Data/dictionaries/"+language);
+            languagesDict.put(language, readDictionary(fr));
+            System.out.println("the dict has been loaded");
+        }
+
+        return languagesDict;
     }
 
     public Character mostCommonCharIn(HashSet<String> dictionary){
@@ -115,7 +126,7 @@ public class VigenereBreaker {
         resetCharMap();
         for (String word : dictionary) {
             for(int i = 0; i < word.length(); i++){
-                char c = word.charAt(i);
+                char c = Character.toLowerCase(word.charAt(i));
                 if(charsMap.containsKey(c)){
                     int prevValue = charsMap.get(c);
                     charsMap.put(c, prevValue + 1);
@@ -132,5 +143,37 @@ public class VigenereBreaker {
         return mostCommonChar;
     }
 
-    // I'm building breakForAllLangs
+    public void breakForAllLangs(String encrypted ){
+        System.out.println("Checking the different languages");
+        HashMap<String, HashSet<String>> languagesDict = createLanguagesDict();
+        String bestDecryptedMessage = "";
+        int bestWordCount = 0;
+        String languageIdentified = "";
+
+        for(String language : languagesDict.keySet()){
+            System.out.println("checking the language " + language);
+            List<Object> result = breakForLanguage(encrypted, languagesDict.get(language));
+            String decryptedMessage = (String) result.get(0);
+            int wordCount = (int) result.get(1);
+            if(wordCount > bestWordCount){
+                bestWordCount = wordCount;
+                bestDecryptedMessage = decryptedMessage;
+                languageIdentified = language;
+            }
+        }
+
+        System.out.println("language identified " + languageIdentified);
+        System.out.println("number of words " + bestWordCount);
+        System.out.println("decrypted message content " + bestDecryptedMessage);
+
+    }
+
+    public void breakVigenere() {
+        FileResource fr = new FileResource();
+        String message = fr.asString();
+        breakForAllLangs(message);
+
+
+    }
+
 }

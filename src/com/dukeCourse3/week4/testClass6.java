@@ -37,8 +37,8 @@ public class testClass6 {
     public static void main(String[] args) {
         //caesarCipherTester();
         //tryKeyLengthTest();
-//        VigenereBreaker vb = new VigenereBreaker();
-//        vb.breakVigenere();
-        mostCommonCharInTest();
+        VigenereBreaker vb = new VigenereBreaker();
+        vb.breakVigenere();
+        //mostCommonCharInTest();
     }
 }
